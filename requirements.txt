@@ -3,3 +3,4 @@ scikit-learn==1.7.0
 xgboost==3.0.2
 joblib
 pandas
+requests==2.32.0
