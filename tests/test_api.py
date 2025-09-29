@@ -10,17 +10,17 @@ def client():
     return app.test_client()
 
 
-def test_health():
+def test_health(client):
     r = client.get(f"{BASE}/health")
     assert r.status_code == 200
     assert r.json().get("status") == "ok"
 
-def test_model_info():
+def test_model_info(client):
     r = client.get(f"{BASE}/model-info")
     assert r.status_code == 200
     assert "model_name" in r.json()
 
-def test_predict_valid():
+def test_predict_valid(client):
     with open("tests/sample_valid.json") as f:
         payload = json.load(f)
     r = client.post(f"{BASE}/predict", json=payload)
@@ -29,7 +29,7 @@ def test_predict_valid():
     assert "prediction" in data
     assert "probability" in data
 
-def test_predict_invalid():
+def test_predict_invalid(client):
     payload = {"wrong": "data"}
     r = client.post(f"{BASE}/predict", json=payload)
     assert r.status_code == 500 or r.status_code == 400
