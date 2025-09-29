@@ -1,0 +1,28 @@
+{
+    "model_name": "breast_cancer_xgboost",
+    "version": "1.0.0",
+    "artifact_path": "C:\\Users\\medin\\OneDrive\\Escritorio\\Especialidad_Machine_Learning\\M_10\\Session_4\\artifacts\\model_xgboost.pkl",
+    "framework": "xgboost",
+    "pipeline_type": "<class 'sklearn.pipeline.Pipeline'>",
+    "metrics": {
+        "train": {
+            "accuracy": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "roc_auc": 1.0
+        },
+        "test": {
+            "accuracy": 0.9736842105263158,
+            "precision": 1.0,
+            "recall": 0.9285714285714286,
+            "f1": 0.9629629629629629,
+            "roc_auc": 0.9940476190476191
+        }
+    },
+    "created_at": "2025-09-28T19:12:39.650384",
+    "dependencies": {
+        "scikit-learn": "1.7.0",
+        "xgboost": "3.0.2"
+    }
+}
