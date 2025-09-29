@@ -27,6 +27,7 @@ jobs:
 
       - name: Run tests
         run: |
+          export PYTHONPATH=$PYTHONPATH:$(pwd)
           pytest tests/test_api.py
           
   docker-build:
