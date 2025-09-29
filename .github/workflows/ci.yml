@@ -1,14 +1,19 @@
-name: CI
+name: CI/CD Docker API
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
-  test:
+  build-test:
     runs-on: ubuntu-latest
+
+    env:
+      BASE_URL: http://localhost:5000
 
     steps:
       - name: Checkout repo
@@ -23,20 +28,29 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install pytest
+          pip install pytest requests
 
       - name: Run tests
         run: |
           export PYTHONPATH=$PYTHONPATH:$(pwd)
           pytest tests/test_api.py
           
-  docker-build:
+  docker-build-push:
+    needs: build-test
     runs-on: ubuntu-latest
-    needs: test
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
 
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
       - name: Build Docker image
-        run: docker build -t breast_cancer_api:ci .
+        run: docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/breast_cancer_api:latest .
+
+      - name: Push Docker image
+        run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/breast_cancer_api:latest
