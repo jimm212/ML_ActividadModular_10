@@ -12,8 +12,8 @@ API REST para predecir cáncer de mama usando un modelo XGBoost entrenado.
 ├── app.py # API Flask  
 ├── requirements.txt # Dependencias Python  
 ├── artifacts/ # Modelo y manifest  
-│ ├── model_xgboost.pkl  
-│ └── manifest.json  
+│  ├── model_xgboost.pkl  
+│  └── manifest.json  
 ├── Dockerfile  
 └── tests/ # Tests automatizados  
 ---
@@ -36,7 +36,7 @@ docker run -p 5000:5000 breast_cancer_api:1.0
 - Predicción: POST http://127.0.0.1:5000/predict con JSON
 
 
-3. Acceder a la API:
+3. Acceder a los Test:
 ```bash
 pytest tests/test_api.py
 ```
